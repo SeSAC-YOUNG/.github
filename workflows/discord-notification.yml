@@ -1,0 +1,24 @@
+name: 팀 협업 알림
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    types: [opened, ready_for_review, closed]
+  issues:
+    types: [opened, assigned]
+
+jobs:
+  team-notification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 팀 알림 전송
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          title: "📊 데이터 분석 프로젝트 업데이트"
+          description: |
+            **이벤트**: ${{ github.event_name }}
+            **담당자**: ${{ github.actor }}
+            **시간**: ${{ github.event.head_commit.timestamp }}
+          color: 0x4287f5
