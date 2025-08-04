@@ -40,7 +40,7 @@ Seoul-Wastewater-Processing-Prediction/
 ## 🔬 모델링 전략  
 
 - **회귀 모델**: XGBoost, LightGBM, CatBoost  
-- **시계열 모델**: GRU, TCN  
+- **시계열 모델**: LSTM  
 - **앙상블**: Weighted Averaging + 룰 기반 보정  
 - **설명**: SHAP으로 변수 중요도 분석  
 - **평가지표**: MAE, RMSE, MAPE, R²  
