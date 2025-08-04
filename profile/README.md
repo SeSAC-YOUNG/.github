@@ -1,141 +1,130 @@
-<!--
+# 🌊 Seoul Wastewater Inflow Prediction using AI
 
-**Here are some ideas to get you started:**
 
-🙋‍♀️ A short introduction - what is your organization all about?
-🌈 Contribution guidelines - how can the community get involved?
-👩‍💻 Useful resources - where can the community find your docs? Is there anything else the community should know?
-🍿 Fun facts - what does your team eat for breakfast?
-🧙 Remember, you can do mighty things with the power of [Markdown](https://docs.github.com/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
--->
+  
+  
+  
+  
 
-## 🚀 프로젝트 개요
 
-### **주제:** 산업군별 ESG 평가 지표에 따른 기업가치 분석
+## 🎯 프로젝트 개요  
 
-**팀 규모:** 4명  
-**프로젝트 기간:** 25.07.21 - 25.09.11  
+**주제**  
+기상·유동인구 기반 서울시 하수처리장 유입량 예측 AI 모델 개발
 
-## 📋 Git 협업 규칙
+**목표**  
+- 집중호우·도시 인구 변동으로 인한 하수 유입 급증을 사전 예측  
+- 펌프·차단막·저류조 선제 운용으로 침수·오염·에너지 과소비 예방  
+- 운영비 10–20% 절감, CSO(합류식 월류) 30% 이상 저감, 에너지 5–15% 절감  
 
-### 🔸 커밋 메시지 규칙
+**필요성**  
+- 2017~2025.6, 8.5년간 축적된 기후 및 도시 인구 변동 분석  
+- 합류식 하수관거 월류 문제 대응과 스마트시티 ESG 인프라 운영  
 
-```
-<type>(<scope>): <subject>
+## 📊 데이터 및 기술 스택  
 
-[본문 - 선택사항]
-[이슈번호 - 필요시]
-```
+| 데이터 유형             | 출처                                   | 기간          |
+|-----------------------|--------------------------------------|-------------|
+| 하수처리량              | 서울 열린데이터광장 (OA-15561)          | 2017~2025.6 |
+| 기상데이터(ASOS)        | 기상자료개방포털                         | 2017~2025.6 |
+| 생활·유동인구           | 서울 열린데이터광장 (OA-14991, OA-15964) | 2017~2025.6 |
+| 부가정보(요일·공휴일·계절) | 직접 생성                                 | N/A         |
 
-**타입 분류:**
+**기술 스택**  
+- Python 3.8+ · Jupyter Notebook  
+- pandas · NumPy · Matplotlib · seaborn  
+- scikit-learn · XGBoost · LightGBM · CatBoost  
+- TensorFlow/Keras (GRU, TCN)  
+- Streamlit · Plotly  
 
-| type | 설명 | 예시 |
-|------|------|------|
-| **feat** | 새로운 기능 추가 | `feat(analysis): 데이터 전처리 함수 구현` |
-| **fix** | 버그 수정 | `fix(viz): 그래프 렌더링 오류 해결` |
-| **docs** | 문서 업데이트 | `docs: 분석 결과 해석 가이드 추가` |
-| **refactor** | 코드 리팩토링 | `refactor(model): 예측 모델 성능 최적화` |
-| **test** | 테스트 코드 | `test: 데이터 검증 테스트 케이스 추가` |
-| **chore** | 기타 작업 | `chore: 라이브러리 의존성 업데이트` |
+## 📂 프로젝트 구조  
 
-### 🔸 브랜치 네이밍 규칙
-
-**기본 구조:** `브랜치 타입/설명-키워드`
-
-| 브랜치 타입 | 용도 | 네이밍 예시 |
-|------------|------|-------------|
-| `feature/` | 새로운 기능 개발 | `feature/data-preprocessing` |
-| `analysis/` | 데이터 분석 작업 | `analysis/customer-segmentation` |
-| `viz/` | 시각화 구현 | `viz/dashboard-charts` |
-| `docs/` | 문서화 작업 | `docs/analysis-report` |
-| `hotfix/` | 긴급 수정 | `hotfix/critical-data-error` |
-
-## 🔄 협업 프로세스
-
-### **1단계: 이슈 생성**
-- 작업 전 반드시 이슈 등록
-- 담당자, 라벨, 마일스톤 설정
-- 예상 소요시간 명시
-
-### **2단계: 브랜치 생성 & 개발**
-> 예시
-```bash
-git checkout -b feature/data-analysis
-# 개발 작업 진행
-git add . && git commit -m "feat(analysis): 고객 세분화 알고리즘 구현"
+```text
+Seoul-Wastewater-Inflow-Prediction/
+├── README.md
+├── requirements.txt
+├── .gitignore
+├── data/
+│   ├── raw/              # 원본 데이터
+│   ├── processed/        # 전처리된 데이터
+│   └── external/         # API 키, 참조 파일
+├── notebooks/            # EDA 및 실험 노트북
+│   ├── 01_data_collection.ipynb
+│   ├── 02_preprocessing.ipynb
+│   ├── 03_EDA.ipynb
+│   └── 04_modeling.ipynb
+├── src/
+│   ├── data/             # 수집/전처리 코드
+│   ├── models/           # 모델 학습 코드
+│   └── visualization/    # 시각화 코드
+├── models/               # 학습된 모델 파일
+├── reports/              # 보고서, 그림, 발표자료
+└── scripts/              # 실행 스크립트
 ```
 
-### **3단계: Pull Request**
-- **최소 1명 이상**의 팀원 리뷰 필수
-- PR 템플릿 활용하여 상세 설명 작성
-- 관련 이슈 번호 연결 (`Closes #이슈번호`)
+## 🛠 설치 및 실행 방법  
 
-### **4단계: 코드 리뷰 & 머지**
-- 리뷰어는 **24시간 내** 피드백 제공
-- 승인 후 `main` 브랜치로 머지
+1. 리포지토리 클론  
+   ```bash
+   git clone https://github.com/YOUNG-MONEY-TEAM/Seoul-Wastewater-Inflow-Prediction.git
+   cd Seoul-Wastewater-Inflow-Prediction
+   ```
 
-## 📂 프로젝트 구조
-> 예시 
-```
-📁 data-analysis-project/
-├── 📁 data/              # 원시 데이터
-├── 📁 notebooks/         # Jupyter 노트북
-├── 📁 src/              # 소스 코드
-├── 📁 reports/          # 분석 보고서
-├── 📁 visualizations/   # 시각화 결과
-└── 📄 README.md
-```
+2. 가상환경 생성 및 활성화  
+   ```bash
+   python -m venv venv
+   source venv/bin/activate     # Windows: venv\Scripts\activate
+   ```
 
-## 👥 팀 커뮤니케이션
+3. 패키지 설치  
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-### **주간 스크럼** (매주 월요일 오전)
-- 지난 주 진행사항 공유
-- 이번 주 목표 설정
-- 블로커 및 도움 요청 사항 논의
+4. 환경변수 설정  
+   ```bash
+   export SEOUL_API_KEY="your_seoul_key"
+   export KMA_API_KEY="your_kma_key"
+   ```
 
->스크럼:
-스크럼은 반복적인 스프린트 주기를 가지며, 각 스프린트마다 목표를 설정하고 팀원들이 협력하여 달성합니다.
+5. 데이터 수집  
+   ```bash
+   python scripts/collect_data.py
+   ```
 
->블로커: 블로커는 스크럼 팀이 스프린트 목표를 달성하는 데 방해가 되는 요소들을 말합니다. 예를 들어, 특정 기술 문제, 필요한 자원 부족, 이해관계자와의 소통 문제 등이 블로커가 될 수 있습니다.
+6. 모델 학습  
+   ```bash
+   python scripts/train_pipeline.py
+   ```
 
+7. 대시보드 실행  
+   ```bash
+   streamlit run src/visualization/dashboard.py
+   ```
 
-### **코드 리뷰 문화**
-- 건설적이고 상세한 피드백 제공
-- 코드 품질과 학습을 위한 상호 리뷰
-- "Why?"에 대한 설명 중시
+## 🔬 모델링 전략  
 
-## 🛠️ 개발 환경
+1. **회귀 모델**: XGBoost, LightGBM, CatBoost  
+2. **시계열 모델**: GRU, TCN  
+3. **앙상블**: Weighted Averaging + 룰 기반 보정  
+4. **성능 지표**: MAE, RMSE, MAPE, R²  
+5. **설명**: SHAP으로 변수 중요도 분석  
 
-**공통 도구:**
-- **언어**: Python 3.9+
-- **분석**: Pandas, NumPy, Scikit-learn
-- **시각화**: Matplotlib, Seaborn, Plotly
-- **협업**: GitHub, Jupyter Notebook
+## 📈 주요 결과 예시  
 
-**코드 품질 관리:**
-- 코드 스타일: PEP8 준수
-- 주석: 복잡한 로직에 반드시 설명 추가
+| 모델     | MAE   | RMSE  | MAPE | R²   |
+|----------|-------|-------|------|------|
+| Ensemble | 1,247 | 1,892 | 2.3% | 0.91 |
+| XGBoost  | 1,358 | 2,045 | 2.7% | 0.89 |
+| GRU      | 1,425 | 2,156 | 2.9% | 0.87 |
 
-## 📈 프로젝트 마일스톤
+## 📝 기여자  
 
-| 주차 | 목표 | 담당 |
-|------|------|------|
-| 1-2주 | 데이터 수집 & 전처리 | 전체 |
-| 3-4주 | 탐색적 데이터 분석 | 분석팀 |
-| 5-6주 | 모델링 & 예측 | 모델링팀 |
-| 7-8주 | 시각화 & 최종 보고서 | 전체 |
+| 역할        | 이름       | 이메일                             |
+|------------|-----------|--------------------------------------|
+| 팀장       | 윤하원     | dbsgk1102@gmail.com                |
+| 팀원       | 이상욱     |                                    |
+| 팀원       | 두소진     |                                    |
+| 팀원       | 손형민     |                                    |
 
-## 🎯 성공 기준
-
-- ✅ **협업 효율성**: PR 리뷰 24시간 내 완료율 90% 이상
-- ✅ **코드 품질**: 주요 함수 90% 이상 문서화
-- ✅ **프로젝트 완성도**: 분석-모델링-시각화-보고서 전 과정 완료
-- ✅ **학습 목표**: 팀원 개별 기술 역량 향상
-
-## 🔗 주요 링크
-- 📝 **회의 기록**: [노션 회의록](https://www.notion.so/238965df706180a88062e0e933242759?v=238965df706180979b07000ce623e42e)
-- 📚 **참고 자료**:
-
-> **💡 규칙 업데이트 제안이 있다면 언제든 이슈로 등록해 주세요!**  
-> **함께 성장하는 협업 문화를 만들어 갑시다 🚀**
-
+> **프로젝트 관련 문의**: dbsgk1102@gmail.com  
